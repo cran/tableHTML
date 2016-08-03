@@ -11,24 +11,24 @@ tableHTML(mtcars, rownames = FALSE)
 ## ---- eval = FALSE-------------------------------------------------------
 #  mytable <- tableHTML(mtcars)
 #  str(mytable)
-#  Classes 'tableHTML', 'html', 'character'  atomic [1:1]
-#  <table class=table_mtcars border=1 style="border-collapse: collapse;">
-#  <tr>
-#    <th id=header_1> </th>
-#    <th id=header_2>mpg</th>
-#    <th id=header_3>cyl</th>
-#  truncated...
+#  # Classes 'tableHTML', 'html', 'character'  atomic [1:1]
+#  # <table class=table_mtcars border=1 style="border-collapse: collapse;">
+#  # <tr>
+#  #   <th id=header_1> </th>
+#  #   <th id=header_2>mpg</th>
+#  #   <th id=header_3>cyl</th>
+#  # truncated...
 
 ## ---- eval = FALSE-------------------------------------------------------
 #  mytable <- tableHTML(mtcars, class = 'myClass')
 #  str(mytable)
-#  Classes 'tableHTML', 'html', 'character'  atomic [1:1]
-#  <table class=myClass border=1 style="border-collapse: collapse;">
-#  <tr>
-#    <th id=header_1> </th>
-#    <th id=header_2>mpg</th>
-#    <th id=header_3>cyl</th>
-#  truncated...
+#  # Classes 'tableHTML', 'html', 'character'  atomic [1:1]
+#  # <table class=myClass border=1 style="border-collapse: collapse;">
+#  # <tr>
+#  #   <th id=header_1> </th>
+#  #   <th id=header_2>mpg</th>
+#  #   <th id=header_3>cyl</th>
+#  # truncated...
 
 ## ----second header-------------------------------------------------------
 library(tableHTML)
@@ -40,7 +40,9 @@ tableHTML(mtcars,
           row_groups = list(c(10, 10, 12), c('Group 1', 'Group 2', 'Group 3')))
 
 ## ----widths--------------------------------------------------------------
-tableHTML(mtcars, widths = rep(100, 12), second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
+tableHTML(mtcars, 
+          widths = rep(100, 12), 
+          second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
 
 ## ----border--------------------------------------------------------------
 tableHTML(mtcars, border = 0)
@@ -191,16 +193,17 @@ mtcars %>%
  replace_html(' <td id="mpg">21</td>', '<td id="mpg" style="background-color:lightyellow">21</td>')
 
 ## ----shiny 1, eval = FALSE-----------------------------------------------
+#  library(shiny)
 #  shinyApp(
 #   ui = fluidPage(
 #     fluidRow(
 #      #leave some spacing
 #      br(),
 #      column(width = 1),
-#      uiOutput("mytable"))
+#      tableHTML_output("mytable"))
 #   ),
 #   server = function(input, output) {
-#    output$mytable <- renderUI(
+#    output$mytable <- render_tableHTML(
 #     tableHTML(mtcars)
 #   )}
 #  )
@@ -212,10 +215,10 @@ mtcars %>%
 #      #leave some spacing
 #      br(),
 #      column(width = 1),
-#      uiOutput("mytable"))
+#      tableHTML_output("mytable"))
 #   ),
 #   server = function(input, output) {
-#    output$mytable <- renderUI(
+#    output$mytable <- render_tableHTML(
 #     mtcars %>%
 #       tableHTML(widths = c(140, rep(45, 11)),
 #                 second_header = list(c(3, 4, 5), c('team1', 'team2', 'team3'))) %>%
@@ -244,14 +247,14 @@ mtcars %>%
 #     column(width = 1),
 #     #include css file in shiny
 #     includeCSS('www/mycss.css'),
-#     uiOutput("mytable"))
+#     tableHTML_output("mytable"))
 #   )
 #  )
 #  
 #  #server.R
 #  shinyServer(
 #  function(input, output) {
-#     output$mytable <- renderUI(
+#     output$mytable <- render_tableHTML(
 #      tableHTML(mtcars, second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
 #     )}
 #  )
