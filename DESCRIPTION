@@ -1,7 +1,7 @@
 Package: tableHTML
 Type: Package
 Title: A Tool to Create HTML Tables
-Version: 0.2.11
+Version: 0.2.12
 Authors@R: person("Theo", 
                   "Boutaris", 
                   email = "teoboot2007@hotmail.com", 
@@ -17,8 +17,8 @@ RoxygenNote: 5.0.1
 Suggests: testthat, knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2016-08-03 15:27:33 UTC; teoboot
+Packaged: 2016-09-13 19:13:19 UTC; teoboot
 Author: Theo Boutaris [aut, cre, cph]
 Maintainer: Theo Boutaris <teoboot2007@hotmail.com>
 Repository: CRAN
-Date/Publication: 2016-08-03 18:03:35
+Date/Publication: 2016-09-13 22:47:34
