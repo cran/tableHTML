@@ -19,7 +19,7 @@ test_that("css is added with add_css_header", {
  #find style+
  expect_true(
   grepl(
-   '<th id="header_1" style="background-color:lightgray;height:30px;">',
+   '<th id="tableHTML_header_1" style="background-color:lightgray;height:30px;">',
    tableHTML(mtcars) %>%
     add_css_header(css = list(c('background-color', 'height'), c('lightgray', '30px')),
                    headers = 1)
@@ -28,7 +28,7 @@ test_that("css is added with add_css_header", {
  
  expect_true(
   grepl(
-   '<th id="header_2" style="background-color:lightgray;height:30px;">',
+   '<th id="tableHTML_header_2" style="background-color:lightgray;height:30px;">',
    tableHTML(mtcars) %>%
     add_css_header(css = list(c('background-color', 'height'), c('lightgray', '30px')),
                    headers = 2)
@@ -41,7 +41,7 @@ test_that("css works fine with additional add_css_header of same style def", {
  
  expect_true(
   grepl(
-   '<th id="header_1" style="background-color:red;background-color:lightgray;height:30px;">',
+   '<th id="tableHTML_header_1" style="background-color:red;background-color:lightgray;height:30px;">',
    tableHTML(mtcars) %>%
     add_css_header(css = list(c('background-color', 'height'), c('lightgray', '30px')),
                    headers = 1) %>%
@@ -52,7 +52,7 @@ test_that("css works fine with additional add_css_header of same style def", {
  
  expect_true(
   grepl(
-   '<th id="header_2" style="background-color:red;background-color:lightgray;height:30px;">',
+   '<th id="tableHTML_header_2" style="background-color:red;background-color:lightgray;height:30px;">',
    tableHTML(mtcars) %>%
     add_css_header(css = list(c('background-color', 'height'), c('lightgray', '30px')),
                    headers = 2) %>%
@@ -67,7 +67,7 @@ test_that("css works fine with additional add_css_header of different style def"
  
  expect_true(
   grepl(
-   '<th id="header_1" style="height:30px;background-color:lightgray;height:30px;">',
+   '<th id="tableHTML_header_1" style="height:30px;background-color:lightgray;height:30px;">',
    tableHTML(mtcars) %>%
     add_css_header(css = list(c('background-color', 'height'), c('lightgray', '30px')),
                    headers = 1) %>%
@@ -78,7 +78,7 @@ test_that("css works fine with additional add_css_header of different style def"
  
  expect_true(
   grepl(
-   '<th id="header_2" style="height:30px;background-color:lightgray;height:30px;">',
+   '<th id="tableHTML_header_2" style="height:30px;background-color:lightgray;height:30px;">',
    tableHTML(mtcars) %>%
     add_css_header(css = list(c('background-color', 'height'), c('lightgray', '30px')),
                    headers = 2) %>%
@@ -92,7 +92,7 @@ test_that("css works fine row groups", {
  
  expect_true(
   grepl(
-   'header_0',
+   'tableHTML_header_0',
    tableHTML(mtcars, 
              border = 1,
              rownames = TRUE, 
@@ -105,3 +105,11 @@ test_that("css works fine row groups", {
  )
 })
 
+test_that("output has attribute", {
+ expect_identical(
+  attr(tableHTML(mtcars, headers = letters[1:11]) %>% 
+        add_css_header(css = list('background-color', 'lightgreen'), headers = 3), 'headers'), 
+  letters[1:11]
+ )
+ 
+})

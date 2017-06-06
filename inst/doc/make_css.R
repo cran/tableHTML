@@ -48,7 +48,7 @@ print(mycss)
 #   ),
 #   server = function(input, output) {
 #    output$mytable <- renderUI(
-#     tableHTML(mtcars, second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
+#     tableHTML(mtcars, second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
 #   )}
 #  )
 
@@ -76,7 +76,7 @@ print(mycss)
 #  shinyServer(
 #  function(input, output) {
 #     output$mytable <- renderUI(
-#      tableHTML(mtcars, second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
+#      tableHTML(mtcars, second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
 #     )}
 #  )
 

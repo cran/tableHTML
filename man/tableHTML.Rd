@@ -5,8 +5,8 @@
 \alias{tableHTML}
 \title{Create an easily css-ible HTML table}
 \usage{
-tableHTML(obj, rownames = TRUE, class = paste0("table_",
-  deparse(substitute(obj))), widths = NULL, second_header = NULL,
+tableHTML(obj, rownames = TRUE, class = paste0("table_", sample(1000:9999,
+  1)), widths = NULL, headers = NULL, second_headers = NULL,
   row_groups = NULL, caption = NULL, footer = NULL, border = 1,
   collapse = c("collapse", "separate", "separate_shiny"), spacing = "2px",
   theme = c("default", "scientific", "rshiny-blue"))
@@ -21,11 +21,14 @@ data.frame class and can be coersible to a data.frame (e.g data.table, tbl, etc.
 will be inlcuded.}
 
 \item{class}{Character string. Specifies the table's class. Convinient if you have multiple
-tables. Default is table_<data_frame_name>.}
+tables. Default is table_xxxx (random 4-digit number).}
 
 \item{widths}{Needs to be a numeric atomic vector with the column widths. Widths are in pixels.}
 
-\item{second_header}{A list of two elements of the same length. The first element will contain
+\item{headers}{character vector. The headers for the HTML table. If not provided the original
+data.frame headers will be used.}
+
+\item{second_headers}{A list of two elements of the same length. The first element will contain
 the column spans (i.e. a numeric atomic vector) whereas the second element will contain the
 names (i.e. a character atomic vector). See the examples for more info. Defauls to NULL.}
 
@@ -79,16 +82,16 @@ the details section.
 In particular:
 \itemize{
   \item \strong{Table:} Will get the class from the class argument in the function. 
-      The final class will be of the form table_<class_name>.
-  \item \strong{Columns:} Will get an id which will be the same as the column name. If rownames
-      exist these will get the rownames id. If row groups exist these will get the row_groups id.
-      Check the \code{add_css_column} function for examples.
-  \item \strong{Headers:} Will get an id of the form header_<header index>. 
-      For example the first header will have the id header_1, the second header 
-      will have header_2 and so on.
-  \item \strong{Second_Header:} Will get an id of the form overheader_<second header index>.  
-      For example the first second_header will have the id overheader_1, the second header  
-      will have overheader_2 and so on.
+  \item \strong{Columns:} Will get an id which will be of the form tableHTML_column_x (where x 
+      is the column position). If rownames exist these will get the tableHTML_rownames id. If 
+      row groups exist these will get the tableHTML_row_groups id. Check the \code{add_css_column} 
+      function for examples.
+  \item \strong{Headers:} Will get an id of the form tableHTML_header_x (where x is the header position). 
+      For example the first header will have the id tableHTML_header_1, the second header 
+      will have tableHTLM_header_2 and so on. If rownames exist these will get the tableHTML_header_0 id.
+  \item \strong{Second_Header:} Will get an id of the form tableHTML_second_header_x (where x is the 
+      second header position). For example the first second_header will have the id tableHTML_second_header_1, 
+      the second header will have tableHTML_second_header_2 and so on.
 }
 
 Notice that rows do not get a specific id or class.
@@ -113,10 +116,10 @@ to view the actual html code.
 tableHTML(mtcars)
 tableHTML(mtcars, rownames = FALSE)
 tableHTML(mtcars, class = 'table1')
-tableHTML(mtcars, second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
+tableHTML(mtcars, second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
 tableHTML(mtcars, 
           widths = c(rep(50, 6), rep(100, 6)), 
-          second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
+          second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
 tableHTML(mtcars, caption = 'This is a caption', footer = 'This is a footer')
 tableHTML(mtcars, 
           row_groups = list(c(10, 10, 12), c('Group 1', 'Group 2', 'Group 3')), 
@@ -126,12 +129,12 @@ tableHTML(mtcars,
           rownames = FALSE, 
           widths = c(140, rep(50, 11)),
           row_groups = list(c(10, 10, 12), c('Group 1', 'Group 2', 'Group 3')),
-          second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
+          second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
 tableHTML(mtcars, 
           rownames = FALSE, 
           widths = c(140, rep(50, 11)),
           row_groups = list(c(10, 10, 12), c('Group 1', 'Group 2', 'Group 3')),
-          second_header = list(c(3, 4), c('col1', 'col2')), 
+          second_headers = list(c(3, 4), c('col1', 'col2')), 
           theme = 'scientific')
 tableHTML(mtcars, theme = 'rshiny-blue', widths = c(140, rep(50, 11)))
 tableHTML(mtcars, collapse = 'separate_shiny', spacing = '5px')

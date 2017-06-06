@@ -16,9 +16,9 @@ test_that("rows are ok", {
 
 test_that("columns and ids are ok", {
  #number of tds is ok
- expect_identical(length(gregexpr('<td id="mpg"', tableHTML(mtcars))[[1]]), nrow(mtcars))
- expect_identical(length(gregexpr('<td id="cyl"', tableHTML(mtcars))[[1]]), nrow(mtcars))
- expect_identical(length(gregexpr('<td id="rownames"', tableHTML(mtcars))[[1]]), nrow(mtcars))
+ expect_identical(length(gregexpr('<td id="tableHTML_column_1"', tableHTML(mtcars))[[1]]), nrow(mtcars))
+ expect_identical(length(gregexpr('<td id="tableHTML_column_2"', tableHTML(mtcars))[[1]]), nrow(mtcars))
+ expect_identical(length(gregexpr('<td id="tableHTML_rownames"', tableHTML(mtcars))[[1]]), nrow(mtcars))
 })
 
 test_that("widths are ok", {
@@ -31,22 +31,43 @@ test_that("widths are ok", {
  
 test_that("headers are ok", {
  #number of headers is ok
- expect_identical(length(gregexpr('<th id="header_', tableHTML(mtcars))[[1]]), ncol(mtcars) + 1L)
- expect_true(grepl('<th id="header_8"', tableHTML(mtcars))) 
+ expect_identical(length(gregexpr('<th id="tableHTML_header_', tableHTML(mtcars))[[1]]), ncol(mtcars) + 1L)
+ expect_true(grepl('<th id="tableHTML_header_8"', tableHTML(mtcars))) 
 })
  
 test_that("second headers are ok", {
  #number of second headers is ok
  expect_identical(
-  length(gregexpr('id="overheader_', 
+  length(gregexpr('id="tableHTML_second_header_', 
                   tableHTML(mtcars, 
-                            second_header = list(c(3, 4, 5), 
+                            second_headers = list(c(3, 4, 5), 
                                                  c('col1', 'col2', 'col3'))))[[1]]), 3L
  )
- expect_true(grepl('id="overheader_1"', 
-                   tableHTML(mtcars, second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3'))))) 
+ expect_true(grepl('id="tableHTML_second_header_1"', 
+                   tableHTML(mtcars, second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3'))))) 
 })
 
 
+test_that("argument headers has the right length", {
+ #number of second headers is ok
+ expect_error(
+  tableHTML(mtcars, headers = letters), 'The length of the headers'
+ )
 
+})
 
+test_that("output has attribute", {
+ 
+ expect_identical(
+  attr(tableHTML(mtcars, headers = letters[1:11]), 'headers'), letters[1:11]
+ )
+ 
+})
+
+test_that("characters < and > get escaped correctly", {
+ 
+ df <- data.frame(a = factor(c('ldskjf', ';sldfkj</%>;lkdjhf', 'http://www.acb.com/test.php')))
+ expect_true(grepl('<td id="tableHTML_column_1">;sldfkj&#60;/%&#62;;lkdjhf</td>', 
+                   tableHTML(df))) 
+
+})

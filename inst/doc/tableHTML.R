@@ -12,11 +12,11 @@ tableHTML(mtcars, rownames = FALSE)
 #  mytable <- tableHTML(mtcars)
 #  str(mytable)
 #  # Classes 'tableHTML', 'html', 'character'  atomic [1:1]
-#  # <table class=table_mtcars border=1 style="border-collapse: collapse;">
+#  # <table class=table_1901 border=1 style="border-collapse: collapse;">
 #  # <tr>
-#  #   <th id=header_1> </th>
-#  #   <th id=header_2>mpg</th>
-#  #   <th id=header_3>cyl</th>
+#  #   <th id="tableHTML_header_1"> </th>
+#  #   <th id="tableHTML_header_2">mpg</th>
+#  #   <th id="tableHTML_header_3">cyl</th>
 #  # truncated...
 
 ## ---- eval = FALSE-------------------------------------------------------
@@ -25,14 +25,13 @@ tableHTML(mtcars, rownames = FALSE)
 #  # Classes 'tableHTML', 'html', 'character'  atomic [1:1]
 #  # <table class=myClass border=1 style="border-collapse: collapse;">
 #  # <tr>
-#  #   <th id=header_1> </th>
-#  #   <th id=header_2>mpg</th>
-#  #   <th id=header_3>cyl</th>
+#  #   <th id="tableHTML_header_1"> </th>
+#  #   <th id="tableHTML_header_2">mpg</th>
+#  #   <th id="tableHTML_header_3">cyl</th>
 #  # truncated...
 
 ## ----second header-------------------------------------------------------
-library(tableHTML)
-tableHTML(mtcars, second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
+tableHTML(mtcars, second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
 
 ## ----row groups----------------------------------------------------------
 tableHTML(mtcars, 
@@ -42,7 +41,7 @@ tableHTML(mtcars,
 ## ----widths--------------------------------------------------------------
 tableHTML(mtcars, 
           widths = rep(100, 12), 
-          second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
+          second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
 
 ## ----border--------------------------------------------------------------
 tableHTML(mtcars, border = 0)
@@ -94,25 +93,25 @@ mtcars %>%
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11))) %>% 
   add_css_column(css = list(c('background-color', 'border'), c('lightblue', '3px solid lightgray')), 
-                 column_names = c('cyl', 'hp', 'rownames'))
+                 columns = c('cyl', 'hp', 'rownames'))
 
 ## ----add css column 2----------------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11))) %>% 
   add_css_row(css = list('background-color', '#f2f2f2')) %>%
   add_css_column(css = list('background-color', 'lightblue'), 
-                 column_names = c('cyl', 'hp', 'rownames')) 
+                 columns = c('cyl', 'hp', 'rownames')) 
  
 
 ## ---- eval = FALSE-------------------------------------------------------
 #  mytable <- tableHTML(mtcars)
 #  print(mytable, viewer = FALSE)
-#  <table class=table_mtcars border=1 style="border-collapse: collapse;">
+#  <table style="border-collapse:collapse;" class=table_2079 border=1>
+#  <thead>
 #  <tr>
-#    <th id=header_1> </th>
-#    <th id=header_2>mpg</th>
-#    <th id=header_3>cyl</th>
-#  </tr>
+#    <th id="tableHTML_header_1"> </th>
+#    <th id="tableHTML_header_2">mpg</th>
+#    <th id="tableHTML_header_3">cyl</th>
 #  truncated...
 
 ## ----add css header 1----------------------------------------------------
@@ -123,10 +122,10 @@ mtcars %>%
 ## ----add css second header 1---------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11)), 
-            second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3'))) %>% 
+            second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3'))) %>% 
   add_css_second_header(css = list(c('background-color', 'border'), 
                                    c('lightgray', '3px solid green')),
-                         second_headers = c(1, 3))  
+                        second_headers = c(1, 3))  
 
 ## ----add css caption-----------------------------------------------------
 mtcars %>%
@@ -170,7 +169,7 @@ mtcars %>%
 ## ----all together--------------------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11)),
-            second_header = list(c(3, 4, 5), c('team1', 'team2', 'team3')),
+            second_headers = list(c(3, 4, 5), c('team1', 'team2', 'team3')),
             caption = 'Table of Cars',
             footer = 'Figure 1. Stats for famous cars') %>% 
   add_css_second_header(css = list(c('height', 'background-color', 'font-size'), 
@@ -183,14 +182,15 @@ mtcars %>%
   add_css_row(css = list('background-color', '#e6f0ff'),
               rows = odd(1:34)) %>%
   add_css_column(css = list('text-align', 'center'), 
-                 column_names = names(mtcars)) %>%
+                 columns = names(mtcars)) %>%
   add_css_caption(css = list(c('text-align', 'font-size', 'color'), c('center', '20px', 'black'))) %>%
   add_css_footer(css = list(c('text-align', 'color'), c('left', 'black')))
 
 ## ----replace html--------------------------------------------------------
 mtcars %>%
  tableHTML(widths = c(140, rep(45, 11))) %>%
- replace_html(' <td id="mpg">21</td>', '<td id="mpg" style="background-color:lightyellow">21</td>')
+ replace_html(' <td id="tableHTML_column_1">21</td>', 
+              '<td id="mpg" style="background-color:lightyellow">21</td>')
 
 ## ----shiny 1, eval = FALSE-----------------------------------------------
 #  library(shiny)
@@ -221,7 +221,7 @@ mtcars %>%
 #    output$mytable <- render_tableHTML(
 #     mtcars %>%
 #       tableHTML(widths = c(140, rep(45, 11)),
-#                 second_header = list(c(3, 4, 5), c('team1', 'team2', 'team3'))) %>%
+#                 second_headers = list(c(3, 4, 5), c('team1', 'team2', 'team3'))) %>%
 #       add_css_second_header(css = list(c('height', 'background-color', 'font-size', 'text-align'),
 #                                        c('40px', ' #e6e6e6', '30px', 'center')),
 #                             second_headers = 1:3) %>%
@@ -233,7 +233,7 @@ mtcars %>%
 #       add_css_row(css = list('background-color', '#e6f0ff'),
 #                   rows = odd(1:34)) %>%
 #       add_css_column(css = list('text-align', 'center'),
-#                      column_names = names(mtcars))
+#                      columns = names(mtcars))
 #   )}
 #  )
 
@@ -255,7 +255,7 @@ mtcars %>%
 #  shinyServer(
 #  function(input, output) {
 #     output$mytable <- render_tableHTML(
-#      tableHTML(mtcars, second_header = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
+#      tableHTML(mtcars, second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
 #     )}
 #  )
 
