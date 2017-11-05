@@ -64,6 +64,11 @@ tableHTML(mtcars, collapse = 'separate_shiny', spacing = '2px')
 ## ----spacing 2-----------------------------------------------------------
 tableHTML(mtcars, collapse = 'separate_shiny', spacing = '5px 2px')
 
+## ----escaping------------------------------------------------------------
+df <- data.frame(a = c('abcd<efgh'))
+tableHTML(df, escape = FALSE, rownames = FALSE)
+tableHTML(df, escape = TRUE, rownames = FALSE)
+
 ## ----theme-scientific----------------------------------------------------
 tableHTML(mtcars, widths = c(140, rep(50, 11)), theme = 'scientific')
 
