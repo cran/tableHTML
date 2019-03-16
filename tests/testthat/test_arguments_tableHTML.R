@@ -87,6 +87,8 @@ test_that("attributes exist", {
  expect_identical(attr(htmltable, 'ncols'), 11L)
  expect_identical(attr(htmltable, 'col_classes'), rep('numeric', 11))
  expect_identical(attr(htmltable, 'rownames'), TRUE)
+ expect_identical(is.null(attr(htmltable, 'row_groups_data')), TRUE)
+ expect_identical(is.null(attr(htmltable, 'second_headers_data')), TRUE)
  expect_identical(attr(htmltable, 'row_groups'), FALSE)
  expect_identical(attr(htmltable, 'second_headers'), FALSE)
 
@@ -111,3 +113,87 @@ test_that("Escapes work fine", {
 
 })
 
+test_that("Round works fine", {
+
+ df <- data.frame(a = c(5.04867))
+ expect_true(grepl('5.05', tableHTML(df, round = 2)))
+
+})
+
+test_that("replace_NA works fine", {
+
+ df <- data.frame(a = c(NA, 'abc', 'abd'))
+ expect_true(grepl('this', tableHTML(df, replace_NA = 'this')))
+
+ df <- data.frame(a = c(NA, 'abc', 'abd'), stringsAsFactors = FALSE)
+ expect_true(grepl('this', tableHTML(df, replace_NA = 'this')))
+
+})
+
+test_that("theme is deprecated", {
+
+ expect_error(mtcars %>%
+               tableHTML(theme = 'scientific'),
+              'Deprecated')
+
+})
+
+test_that("add_data works", {
+ expect_error(mtcars %>%
+               tableHTML(add_data = c(TRUE, FALSE)),
+              "add_data")
+ expect_error(mtcars %>%
+               tableHTML(add_data = "TRUE"),
+              "add_data")
+
+ with_data <- mtcars %>%
+  tableHTML(add_data = TRUE)
+
+ expect_identical(mtcars, attributes(with_data)[["data"]])
+
+ without_data <- mtcars %>%
+  tableHTML(add_data = FALSE)
+
+ expect_null(attributes(without_data)[["data"]])
+
+})
+
+test_that("spacing starts with a number", {
+  
+  expect_error(mtcars %>% 
+                 tableHTML(collapse = 'separate', spacing = 'abc'),
+               'distances in spacing')
+  
+})
+
+test_that("round is numeric", {
+  
+  expect_error(mtcars %>%
+                 tableHTML(round = 'abc'),
+               'round needs')
+  
+}) 
+
+test_that("separate works", {
+  
+  expect_true(grepl('border-collapse:separate', 
+              mtcars %>% tableHTML(collapse = 'separate')))
+  
+})
+
+test_that("separate_shiny works", {
+  
+  expect_true(grepl('border-collapse:separate !important', 
+                    mtcars %>% tableHTML(collapse = 'separate_shiny')))
+  
+})
+
+test_that("print works", {
+  
+  out <- capture.output(mtcars %>% 
+                          tableHTML() %>% 
+                          print(viewer = FALSE)
+                        )
+  expect_true(any(grepl('tableHTML_column_1', out)))
+  
+})

@@ -1,4 +1,4 @@
-# tableHTML
+# tableHTML <img src="https://github.com/LyzandeR/tableHTML/blob/master/readme_files/tableHTML_logo.png" width="200px" height="auto" align="right" />
 
 [![CRAN version](http://www.r-pkg.org/badges/version/tableHTML)](https://cran.r-project.org/package=tableHTML)
 [![Travis-CI Build Status](https://travis-ci.org/LyzandeR/tableHTML.svg?branch=master)](https://travis-ci.org/LyzandeR/tableHTML)
@@ -51,6 +51,8 @@ To find out about all the functions and how to use the package with shiny you ca
 
 To see a gallery of examples you can visit the [examples page](https://cran.r-project.org/package=tableHTML/vignettes/examples.html).
 
-For a tutorial on how to build a css file and how to use that in shiny (in a fast way) you can visit the [make_css and shiny](https://cran.r-project.org/package=tableHTML/vignettes/make_css.html) link. 
+To use conditional formatting or colour ranking for your table you can visit the [conditional formatting vignette](https://cran.r-project.org/package=tableHTML/vignettes/conditional_column.html).
+
+For a tutorial on how to build a CSS file and how to use that in shiny (in a fast way) you can visit the [make_css and shiny](https://cran.r-project.org/package=tableHTML/vignettes/make_css.html) link. 
 
 To see the released version you can visit [CRAN](https://cran.r-project.org/package=tableHTML).

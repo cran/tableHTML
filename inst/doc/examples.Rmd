@@ -1,6 +1,6 @@
 ---
 title: "tableHTML"
-author: "Theo Boutaris, Clemens Zauchner"
+author: "Theo Boutaris, Clemens Zauchner, Dana Jomar"
 date: "`r Sys.Date()`"
 output: 
   html_document
@@ -11,18 +11,19 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo=TRUE)
 ```
 
 The following are a set of more complex examples of the tableHTML package. The goal of these 
 examples is to show you what you can do with the package and all the different ways you can use it 
 to make the HTML tables they way you want them to look. The point of the examples is to 
 demonstrate what can be achieved and not to show nice looking HTML tables (apart from the 
-demonstration of the themes).     
+demonstration of the themes).    
+
 
 ### Row groups and Second Headers
 
-```{r example 1}
+```{r example1}
 library(tableHTML)
 tableHTML(mtcars, 
           rownames = FALSE, 
@@ -33,7 +34,7 @@ tableHTML(mtcars,
 
 ### Add row css and column css
 
-```{r example 2}
+```{r example2}
 tableHTML(mtcars, 
           border = 5,
           rownames = TRUE, 
@@ -47,7 +48,7 @@ tableHTML(mtcars,
 
 ### Add row, column, second header and header css
 
-```{r example 3}
+```{r example3}
 tableHTML(mtcars, 
           border = 1,
           rownames = TRUE, 
@@ -67,31 +68,69 @@ tableHTML(mtcars,
 
 ### scientific theme
 
-```{r example 4}
+```{r example4}
 tableHTML(mtcars, 
-          border = 1,
           rownames = TRUE, 
           widths = c(110, 140, rep(50, 11)),
           row_groups = list(c(10, 10, 12), c('Group 1', 'Group 2', 'Group 3')),
-          second_headers = list(c(2, 5, 6), c('col1', '', 'col3')),
-          theme = 'scientific')
+          second_headers = list(c(2, 5, 6), c('col1', '', 'col3'))) %>%
+ add_theme('scientific')
 ```
 
 ### rshiny-blue theme
 
-```{r example 5}
+```{r example5}
 tableHTML(mtcars, 
-          border = 1,
           rownames = TRUE, 
           widths = c(110, 140, rep(50, 11)),
           row_groups = list(c(10, 10, 12), c('Group 1', 'Group 2', 'Group 3')),
-          second_headers = list(c(2, 5, 6), c('', 'col2', 'col3')),
-          theme = 'rshiny-blue')
+          second_headers = list(c(2, 5, 6), c('', 'col2', 'col3'))) %>%
+ add_theme('rshiny-blue')
 ```
 
-### Colouring a Row Group
+### colorize theme
 
-```{r example 6}
+```{r example6}
+mtcars %>% 
+ tableHTML(rownames = TRUE,
+           widths = c(140, rep(50, 11))) %>%
+ add_theme('colorize', color = 'navyblue')
+```
+
+### colorize theme with Two Colors
+
+```{r example7.1}
+mtcars %>%
+ tableHTML(rownames = TRUE,
+          widths = c(140, rep(50, 11))) %>%
+ add_theme_colorize(color=c('steelblue', 'green'))
+```
+
+### colorize theme with total rows and an id_column
+
+```{r example7.2}
+ts_to_df <- data.frame(year = trunc(time(AirPassengers)), 
+                 Month = month.abb[cycle(AirPassengers)],
+                 AirPassengers, 
+                 stringsAsFactors = F) 
+ts_to_df <- ts_to_df[ts_to_df$year < 1951, ]
+  
+rbind(ts_to_df[1:12, 2:3],
+      c('AVG', round(mean(ts_to_df[1:12, ]$AirPassengers), 2)),
+      ts_to_df[13:24, 2:3],
+      c('AVG', round(mean(ts_to_df[13:24, ]$AirPassengers), 2))) %>% 
+ tableHTML(rownames = FALSE, 
+            widths = rep(75, 3),
+            row_groups = list(c(13, 13), 
+                              unique(ts_to_df$year))) %>% 
+  add_theme_colorize(id_column = TRUE, 
+                   total_rows = c(13, 26), 
+                   color = c('#009999', 'yellow2'))
+```
+
+### Coloring a Row Group
+
+```{r example8}
 tableHTML(mtcars, 
           border = 5,
           rownames = TRUE, 
@@ -107,7 +146,7 @@ tableHTML(mtcars,
 
 ### Collapsed table
 
-```{r example 7, eval = FALSE}
+```{r example9, eval = FALSE}
 tableHTML(mtcars, 
           border = 5,
           rownames = TRUE, 
@@ -124,7 +163,7 @@ tableHTML(mtcars,
 
 ### Table with Second Headers
 
-```{r example 8}
+```{r example10}
 tableHTML(mtcars, 
           border = 5,
           rownames = TRUE, 
@@ -138,7 +177,7 @@ tableHTML(mtcars,
 
 ### add_css_column overwrites add_css_row
 
-```{r example 9}
+```{r example11}
 tableHTML(mtcars, 
           border = 5,
           rownames = TRUE, 
@@ -153,7 +192,7 @@ tableHTML(mtcars,
 
 ### Table with thead and tbody
 
-```{r example 10}
+```{r example12}
 tableHTML(mtcars, 
           border = 5,
           rownames = TRUE, 
@@ -165,7 +204,7 @@ tableHTML(mtcars,
 
 ### Column Overwrites Row Overwrites tbody / thead Overwrites table
 
-```{r example 11}
+```{r example13}
 tableHTML(mtcars, 
           rownames = TRUE, 
           widths = c(140, rep(50, 11)),
@@ -178,7 +217,7 @@ tableHTML(mtcars,
 
 ### Table with One Empty Second Header
 
-```{r example 12}
+```{r example14}
 tableHTML(mtcars, 
           border = 5,
           rownames = TRUE, 
@@ -192,7 +231,7 @@ tableHTML(mtcars,
 
 ### Table with the Last Second Header Missing
 
-```{r example 13}
+```{r example15}
 tableHTML(mtcars, 
           border = 5,
           rownames = TRUE, 
@@ -206,7 +245,7 @@ tableHTML(mtcars,
 
 ### Only Row Groups no Second Headers
 
-```{r example 14}
+```{r example16}
 tableHTML(mtcars, 
           rownames = TRUE, 
           widths = c(100, 140, rep(50, 11)),
@@ -219,7 +258,7 @@ tableHTML(mtcars,
 
 ### Using non-collapsed tables in shiny
 
-```{r example 15}
+```{r example17}
 tableHTML(mtcars, collapse = 'separate_shiny', spacing = '5px 2px') %>%
     add_css_table(css = list(c('background-color'), c('lightgray'))) %>% 
     add_css_table(css = list('color', 'blue'))
@@ -227,10 +266,10 @@ tableHTML(mtcars, collapse = 'separate_shiny', spacing = '5px 2px') %>%
 
 ### Using conditional formatting with other tableHTML functions
 
-```{r example_17}
+```{r example18}
 tableHTML(mtcars,
-          widths = c(140, rep(50, 11)),
-          theme = 'scientific') %>%
+          widths = c(140, rep(50, 11))) %>%
+  add_theme('scientific') %>%
   add_css_row(css = list('background-color', '#E0E0E0'), rows = odd(3:34)) %>%
   add_css_conditional_column(conditional = 'between',
                              between = c(3.5, 4.22), 
@@ -246,9 +285,9 @@ tableHTML(mtcars,
 
 Note: the `<div>` container is introduced,
 because the css property `'transform:rotate(...deg);'` would rotate the whole `<td>` 
-element would be rotated and background colour would be out of place
+element would be rotated and background color would be out of place
 
-```{r example_16}
+```{r example19}
 tableHTML(iris[c(1:5, 51:55, 101:105), 1:4], 
           rownames = FALSE,
           headers = rep(c('Length', 'Width'), 2),
@@ -267,15 +306,42 @@ tableHTML(iris[c(1:5, 51:55, 101:105), 1:4],
   add_css_header(css = list(c('color', 'background-color'),
                             c('white', 'gray')),
                  headers = 1:5) %>%
-  add_css_conditional_column('colour_rank',
-                             colour_rank_theme = 'White-Green',
+  add_css_conditional_column('color_rank',
+                             color_rank_theme = 'White-Green',
                              columns = 1:2,
                              same_scale = FALSE) %>%
-  add_css_conditional_column('colour_rank',
-                             colour_rank_theme = 'White-Blue',
+  add_css_conditional_column('color_rank',
+                             color_rank_theme = 'White-Blue',
                              columns = 3:4,
                              same_scale = FALSE)
 ```
+
+### Table added as an image (not as html)
+
+This works perfectly with rmarkdown when you want to add the table as an image in a pdf, word or html document.
+
+```{r example20, eval=FALSE}
+mtcars %>%
+ tableHTML(widths = c(140, rep(50, 11))) %>%
+ add_theme('rshiny-blue') %>%
+ tableHTML_to_image(type = 'png')
+```
+
+![](image_table2.png)
+
+### Table added as an image (changing size of image)
+
+To increase the size of the image, you can use the rmarkdown chunk options. Here,
+I am using `fig.height=7` and `fig.width=7`.
+
+```{r example21, fig.height=7, fig.width=7, eval=FALSE}
+mtcars %>%
+ tableHTML(widths = c(140, rep(50, 11))) %>%
+ add_theme('rshiny-blue') %>%
+ tableHTML_to_image(type = 'png')
+```
+
+![](image_table3.png)
 
 \     
 

@@ -166,28 +166,30 @@ tableHTML(mtcars,
 df <- data.frame(factor_alphabetic = c('d', 'a', 'e', 'a', 'd', 'd', 'a', 'c', 'd', 'a'),
                  factor_ordered = c('D', 'A', 'E', 'A', 'D', 'D', 'A', 'C', 'D', 'A'),
                  stringsAsFactors = TRUE)
+
+df$factor_ordered <- factor(df, levels = c('B', 'D', 'A', 'E', 'C'))
+
 tableHTML(df, 
           rownames = FALSE) %>%
-  add_css_conditional_column(colour_rank_theme = 'White-Green',
+  add_css_conditional_column(color_rank_theme = 'White-Green',
                              columns = 1) %>%
-  add_css_conditional_column(colour_rank_theme = 'White-Green', 
-                             columns = 2,
-                             levels = c('B', 'D', 'A', 'E', 'C'))
+  add_css_conditional_column(color_rank_theme = 'White-Green', 
+                             columns = 2)
 
 ## ----example_14----------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
-  add_css_conditional_column(colour_rank_theme = "RAG", columns = 1) %>%
-  add_css_conditional_column(colour_rank_theme = "Spectral", columns = 2) %>%
-  add_css_conditional_column(colour_rank_theme = "Rainbow", columns = 3) %>%
-  add_css_conditional_column(colour_rank_theme = "White-Green", columns = 4) %>%
-  add_css_conditional_column(colour_rank_theme = "White-Blue", columns = 5) %>%
-  add_css_conditional_column(colour_rank_theme = "White-Red", columns = 6) 
+  add_css_conditional_column(color_rank_theme = "RAG", columns = 1) %>%
+  add_css_conditional_column(color_rank_theme = "Spectral", columns = 2) %>%
+  add_css_conditional_column(color_rank_theme = "Rainbow", columns = 3) %>%
+  add_css_conditional_column(color_rank_theme = "White-Green", columns = 4) %>%
+  add_css_conditional_column(color_rank_theme = "White-Blue", columns = 5) %>%
+  add_css_conditional_column(color_rank_theme = "White-Red", columns = 6) 
 
 ## ----example_15----------------------------------------------------------
 tableHTML(mtcars,
           widths = rep(100, 12)) %>%
-  add_css_conditional_column(colour_rank_theme = "RAG", 
+  add_css_conditional_column(color_rank_theme = "RAG", 
                              columns = 1, 
                              decreasing = TRUE) 
 
@@ -198,33 +200,33 @@ tableHTML(data.frame(a = 1:20, b = rep(1:5, 4), c = 1:20, d = rep(1:5, 4)),
                                 c("same_scale = TRUE",
                                   "same_scale = FALSE")),
           rownames = FALSE) %>%
-  add_css_conditional_column(colour_rank_theme = "RAG",
+  add_css_conditional_column(color_rank_theme = "RAG",
                              columns = c(1, 2), 
                              decreasing = FALSE, 
                              same_scale = TRUE) %>%
-  add_css_conditional_column(colour_rank_theme = "RAG", 
+  add_css_conditional_column(color_rank_theme = "RAG", 
                              columns = c(3, 4), 
                              decreasing = FALSE, 
                              same_scale = FALSE)
 
 ## ----example_17----------------------------------------------------------
-colour_rank_css <- 
-  make_css_colour_rank_theme(list(qsec = mtcars$qsec),
+color_rank_css <- 
+  make_css_color_rank_theme(list(qsec = mtcars$qsec),
                              colors = RColorBrewer::brewer.pal(9, "Set1"))
 
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
-  add_css_conditional_column(colour_rank_theme =  "Custom", 
-                             colour_rank_css = colour_rank_css, 
+  add_css_conditional_column(color_rank_theme =  "Custom", 
+                             color_rank_css = color_rank_css, 
                              columns = 7)
 
 ## ----example_18----------------------------------------------------------
 tableHTML(mtcars,
           widths = c(120, 200, rep(100, 11)),
-          row_groups = list(c(10, 10, 12), c('Group 1', 'Group 2', 'Group 3')),
-          theme = "rshiny-blue") %>%
+          row_groups = list(c(10, 10, 12), c('Group 1', 'Group 2', 'Group 3'))) %>%
+ add_theme('rshiny-blue') %>%
  add_css_column(css = list('border', '1px solid'), columns = 1) %>%
- add_css_conditional_column(colour_rank_theme = "RAG", columns = 1) %>%
+ add_css_conditional_column(color_rank_theme = "RAG", columns = 1) %>%
  add_css_conditional_column(conditional = "contains",
                             value = "1", 
                             css = list(c('color', 'font-size', 'border'), 
@@ -256,8 +258,8 @@ tableHTML(mtcars,
                  headers = 3:13) %>%
   add_css_row(css = list('background-color', '#f2f2f2'), 
               rows = even(3:34)) %>%
-  add_css_conditional_column(colour_rank_css = 
-                               make_css_colour_rank_theme(list(row_groups = 1:3),
+  add_css_conditional_column(color_rank_css = 
+                               make_css_color_rank_theme(list(row_groups = 1:3),
                                                           colors = c('#00b200',
                                                                      '#007f00',
                                                                      '#004c00'),
@@ -275,6 +277,6 @@ tableHTML(mtcars,
                              value = "3", 
                              css = list('background-color', '#A9A9A9'),
                              columns = "row_groups") %>%
-  add_css_conditional_column(colour_rank_theme = 'RAG', 
+  add_css_conditional_column(color_rank_theme = 'RAG', 
                              columns = 4)
 
