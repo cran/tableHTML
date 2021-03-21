@@ -1,14 +1,14 @@
-## ----setup, include=FALSE------------------------------------------------
+## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE)
 
-## ----basic---------------------------------------------------------------
+## ----basic--------------------------------------------------------------------
 library(tableHTML)
 tableHTML(mtcars)
 
-## ----rownames------------------------------------------------------------
+## ----rownames-----------------------------------------------------------------
 tableHTML(mtcars, rownames=FALSE)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  mytable <- tableHTML(mtcars)
 #  str(mytable)
 #  # Classes 'tableHTML', 'html', 'character'  atomic [1:1]
@@ -19,7 +19,7 @@ tableHTML(mtcars, rownames=FALSE)
 #  #   <th id="tableHTML_header_3">cyl</th>
 #  # truncated...
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  mytable <- tableHTML(mtcars, class='myClass')
 #  str(mytable)
 #  # Classes 'tableHTML', 'html', 'character'  atomic [1:1]
@@ -30,59 +30,59 @@ tableHTML(mtcars, rownames=FALSE)
 #  #   <th id="tableHTML_header_3">cyl</th>
 #  # truncated...
 
-## ----secondheader--------------------------------------------------------
+## ----secondheader-------------------------------------------------------------
 tableHTML(mtcars, second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
 
-## ----rowgroups-----------------------------------------------------------
+## ----rowgroups----------------------------------------------------------------
 tableHTML(mtcars, 
           rownames = FALSE, 
           row_groups = list(c(10, 10, 12), c('Group 1', 'Group 2', 'Group 3')))
 
-## ----widths--------------------------------------------------------------
+## ----widths-------------------------------------------------------------------
 tableHTML(mtcars, 
           widths = rep(100, 12), 
           second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3')))
 
-## ----border--------------------------------------------------------------
+## ----border-------------------------------------------------------------------
 tableHTML(mtcars, border = 0)
 
-## ----caption-------------------------------------------------------------
+## ----caption------------------------------------------------------------------
 tableHTML(mtcars, caption = 'This is  a table')
 
-## ----footer--------------------------------------------------------------
+## ----footer-------------------------------------------------------------------
 tableHTML(mtcars, footer = 'This is  a footer')
 
-## ----collapse, eval=FALSE------------------------------------------------
+## ----collapse, eval=FALSE-----------------------------------------------------
 #  tableHTML(mtcars, collapse = 'separate')
 
-## ----collapse2-----------------------------------------------------------
+## ----collapse2----------------------------------------------------------------
 tableHTML(mtcars, collapse = 'separate_shiny')
 
-## ----spacing1------------------------------------------------------------
+## ----spacing1-----------------------------------------------------------------
 tableHTML(mtcars, collapse = 'separate_shiny', spacing = '2px')
 
-## ----spacing2------------------------------------------------------------
+## ----spacing2-----------------------------------------------------------------
 tableHTML(mtcars, collapse = 'separate_shiny', spacing = '5px 2px')
 
-## ----escaping------------------------------------------------------------
+## ----escaping-----------------------------------------------------------------
 df <- data.frame(a = c('abcd<efgh'))
 tableHTML(df, escape = FALSE, rownames = FALSE)
 
-## ----escaping_2----------------------------------------------------------
+## ----escaping_2---------------------------------------------------------------
 tableHTML(df, escape = TRUE, rownames = FALSE)
 
-## ----addcssrow1----------------------------------------------------------
+## ----addcssrow1---------------------------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11))) %>% 
   add_css_row(css = list(c('background-color', 'border'), c('lightblue', '2px solid lightgray')))
 
-## ----addcssrow2----------------------------------------------------------
+## ----addcssrow2---------------------------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11))) %>% 
   add_css_row(css = list(c('background-color', 'border'), c('lightblue', '2px solid lightgray')),
               rows = 2:33)
 
-## ----addcssrow3----------------------------------------------------------
+## ----addcssrow3---------------------------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11))) %>% 
   add_css_row(css = list('background-color', '#f2f2f2'),
@@ -90,13 +90,13 @@ mtcars %>%
   add_css_row(css = list('background-color', '#e6f0ff'),
               rows = even(1:33))
 
-## ----add css column 1----------------------------------------------------
+## ----add css column 1---------------------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11))) %>% 
   add_css_column(css = list(c('background-color', 'border'), c('lightblue', '3px solid lightgray')), 
                  columns = c('cyl', 'hp', 'rownames'))
 
-## ----addcsscolumn2-------------------------------------------------------
+## ----addcsscolumn2------------------------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11))) %>% 
   add_css_row(css = list('background-color', '#f2f2f2')) %>%
@@ -104,7 +104,7 @@ mtcars %>%
                  columns = c('cyl', 'hp', 'rownames')) 
  
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  mytable <- tableHTML(mtcars)
 #  print(mytable, viewer = FALSE)
 #  <table style="border-collapse:collapse;" class=table_2079 border=1>
@@ -115,12 +115,43 @@ mtcars %>%
 #    <th id="tableHTML_header_3">cyl</th>
 #  truncated...
 
-## ----addcssheader1-------------------------------------------------------
+## ----addcssrowsincolumn-------------------------------------------------------
+ tableHTML(mtcars) %>%
+   add_css_rows_in_column(css = list('background-color', 
+                                    rep(c('red', 'green'), each = 16)),
+                         column = 'mpg')
+
+## ----addcssrowsincolumn2------------------------------------------------------
+ tableHTML(mtcars) %>%
+   add_css_rows_in_column(css = list('background-color', 
+                                    rep(c('red', 'green'), each = 16)),
+                         column = 'mpg') %>%
+   add_css_rows_in_column(css = list('background-color', 
+                                    rep(c('green', 'red'), each = 16)),
+                         column = 'cyl')
+  
+
+
+## ----addcssrowsincolumn3------------------------------------------------------
+ tableHTML(mtcars) %>%
+   add_css_column(css = list('border', '3px solid blue'),
+                  columns = c('mpg', 'disp', 'rownames')) %>%
+   add_css_rows_in_column(css = list(c('background-color'), 
+                                    rep(c('red', 'green'), each = 16)),
+                         column = 'mpg')
+  
+     
+
+## ----editablecol--------------------------------------------------------------
+ tableHTML(mtcars) %>%
+   add_editable_column(columns = 'mpg')
+
+## ----addcssheader1------------------------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11))) %>% 
   add_css_header(css = list('background-color', 'lightgray'), headers = c(1, 4))
 
-## ----addcsssecondheader1-------------------------------------------------
+## ----addcsssecondheader1------------------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11)), 
             second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3'))) %>% 
@@ -128,46 +159,46 @@ mtcars %>%
                                    c('lightgray', '3px solid green')),
                         second_headers = c(1, 3))  
 
-## ----addcsscaption-------------------------------------------------------
+## ----addcsscaption------------------------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11)), 
             caption = 'This is a table') %>% 
   add_css_caption(css = list(c('color', 'font-size', 'text-align'), c('blue', '20px', 'left')))  
 
-## ----addcssfooter--------------------------------------------------------
+## ----addcssfooter-------------------------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11)), 
             footer = 'This is a footer') %>% 
   add_css_footer(css = list(c('color', 'font-size', 'text-align'), c('blue', '20px', 'left')))  
 
-## ----addcssthead---------------------------------------------------------
+## ----addcssthead--------------------------------------------------------------
 mtcars %>%
   tableHTML() %>% 
   add_css_thead(css = list('background-color', 'lightgray')) 
 
-## ----addcsstbody---------------------------------------------------------
+## ----addcsstbody--------------------------------------------------------------
 mtcars %>%
   tableHTML() %>% 
   add_css_tbody(css = list('background-color', 'lightgray')) 
 
-## ----theadexample1-------------------------------------------------------
+## ----theadexample1------------------------------------------------------------
 mtcars %>%
   tableHTML() %>% 
   add_css_thead(css = list('background-color', 'lightgray')) %>%
   add_css_row(css = list('background-color', 'blue'), rows = 1)
 
-## ----theadexample2-------------------------------------------------------
+## ----theadexample2------------------------------------------------------------
 mtcars %>%
   tableHTML() %>% 
   add_css_tbody(css = list('background-color', 'lightgray')) %>%
   add_css_row(css = list('background-color', 'blue'), rows = c(4, 6))
 
-## ----addcsstable---------------------------------------------------------
+## ----addcsstable--------------------------------------------------------------
 mtcars %>%
   tableHTML() %>% 
   add_css_table(css = list('background-color', 'lightgray')) 
 
-## ----alltogether---------------------------------------------------------
+## ----alltogether--------------------------------------------------------------
 mtcars %>%
   tableHTML(widths = c(140, rep(45, 11)),
             second_headers = list(c(3, 4, 5), c('team1', 'team2', 'team3')),
@@ -187,18 +218,31 @@ mtcars %>%
   add_css_caption(css = list(c('text-align', 'font-size', 'color'), c('center', '20px', 'black'))) %>%
   add_css_footer(css = list(c('text-align', 'color'), c('left', 'black')))
 
-## ----replacehtml---------------------------------------------------------
+## ----hyperlink1---------------------------------------------------------------
+#escape needs to be set to FALSE
+tableHTML(data.frame(cran = make_hyperlink(c('https://cran.r-project.org/',
+                                             'https://cran.r-project.org/package=tableHTML'))), 
+          escape = FALSE)
+
+## ----hyperlink2---------------------------------------------------------------
+#escape needs to be set to FALSE
+tableHTML(data.frame(cran = make_hyperlink(c('https://cran.r-project.org/',
+                                             'https://cran.r-project.org/package=tableHTML'),
+                                           c('cran', 'tableHTML'))), 
+          escape = FALSE)
+
+## ----replacehtml--------------------------------------------------------------
 mtcars %>%
  tableHTML(widths = c(140, rep(45, 11))) %>%
  replace_html(' <td id="tableHTML_column_1">21</td>', 
               '<td id="mpg" style="background-color:lightyellow">21</td>')
 
-## ----picture, eval=FALSE-------------------------------------------------
+## ----picture, eval=FALSE------------------------------------------------------
 #  mtcars %>%
 #    tableHTML() %>%
 #    tableHTML_to_image()
 
-## ----shiny1, eval=FALSE--------------------------------------------------
+## ----shiny1, eval=FALSE-------------------------------------------------------
 #  library(shiny)
 #  shinyApp(
 #   ui = fluidPage(
@@ -214,7 +258,7 @@ mtcars %>%
 #   )}
 #  )
 
-## ----shiny2, eval=FALSE--------------------------------------------------
+## ----shiny2, eval=FALSE-------------------------------------------------------
 #  shinyApp(
 #   ui = fluidPage(
 #     fluidRow(
@@ -243,7 +287,7 @@ mtcars %>%
 #   )}
 #  )
 
-## ----shinycss, eval=FALSE------------------------------------------------
+## ----shinycss, eval=FALSE-----------------------------------------------------
 #  #ui.R
 #  shinyUI(
 #   fluidPage(
@@ -265,18 +309,18 @@ mtcars %>%
 #     )}
 #  )
 
-## ----css_ex1, echo=FALSE-------------------------------------------------
+## ----css_ex1, echo=FALSE------------------------------------------------------
 mtcars %>%
   tableHTML(second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3'))) %>%
   add_css_column(list('border-left', '5px solid red'), columns = 1)
 
-## ----css_ex2, echo=FALSE-------------------------------------------------
+## ----css_ex2, echo=FALSE------------------------------------------------------
 mtcars %>%
   tableHTML(second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3'))) %>%
   add_css_column(list('border-left', '5px solid red'), columns = 1) %>%
   add_css_header(list('background-color', 'green'), 2)
 
-## ----css_ex3, echo=FALSE-------------------------------------------------
+## ----css_ex3, echo=FALSE------------------------------------------------------
 mtcars %>%
   tableHTML(second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3'))) %>%
   add_css_column(list('border-left', '5px solid red'), columns = 1) %>%

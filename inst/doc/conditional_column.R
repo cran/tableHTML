@@ -1,7 +1,7 @@
-## ----setup, include=FALSE------------------------------------------------
+## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE)
 
-## ----example_1-----------------------------------------------------------
+## ----example_1----------------------------------------------------------------
 library(tableHTML)
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
@@ -10,7 +10,7 @@ tableHTML(mtcars,
                              css = list('background-color', 'green'), 
                              columns = 'mpg')
 
-## ----example_2-----------------------------------------------------------
+## ----example_2----------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
   add_css_conditional_column(conditional = '==', 
@@ -18,7 +18,7 @@ tableHTML(mtcars,
                              css = list('background-color', 'steelblue'), 
                              columns = c('drat', 'wt'))
 
-## ----example_3-----------------------------------------------------------
+## ----example_3----------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
   add_css_conditional_column(conditional = '==', 
@@ -30,7 +30,7 @@ tableHTML(mtcars,
                              css = list('background-color', 'steelblue'), 
                              columns = c('drat', 'wt'))
 
-## ----example_4-----------------------------------------------------------
+## ----example_4----------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
   add_css_conditional_column(conditional = '==', 
@@ -42,7 +42,7 @@ tableHTML(mtcars,
                              css = list('background-color', 'steelblue'), 
                              columns = 'mpg')
 
-## ----example_5-----------------------------------------------------------
+## ----example_5----------------------------------------------------------------
  qu_25_75 <- quantile(mtcars$disp, c(0.25, 0.75))
  
  tableHTML(mtcars,
@@ -60,7 +60,7 @@ tableHTML(mtcars,
                               css = list('background-color', "red"), 
                               columns = c("disp"))
 
-## ----example_6-----------------------------------------------------------
+## ----example_6----------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
   add_css_conditional_column(conditional = 'min', 
@@ -68,7 +68,7 @@ tableHTML(mtcars,
                              columns = c('disp', 'hp'),
                              same_scale = TRUE)
 
-## ----example_7-----------------------------------------------------------
+## ----example_7----------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
   add_css_conditional_column(conditional = 'min', 
@@ -76,7 +76,7 @@ tableHTML(mtcars,
                              columns = c('disp', 'hp'),
                              same_scale = FALSE)
 
-## ----example_8-----------------------------------------------------------
+## ----example_8----------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>% 
   add_css_conditional_column(conditional = "min", 
@@ -84,7 +84,7 @@ tableHTML(mtcars,
                              columns = seq_along(mtcars),
                              same_scale = FALSE)
 
-## ----example_9-----------------------------------------------------------
+## ----example_9----------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
   add_css_conditional_column(conditional = "==",
@@ -114,7 +114,7 @@ tableHTML(mtcars,
   
 
 
-## ----example_10----------------------------------------------------------
+## ----example_10---------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
   add_css_conditional_column(conditional = "min",
@@ -133,7 +133,7 @@ tableHTML(mtcars,
                              css = list('background-color', "orange"), 
                              columns = c(5, 6)) 
 
-## ----example_11----------------------------------------------------------
+## ----example_11---------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
   add_css_conditional_column(conditional = "between",
@@ -141,7 +141,7 @@ tableHTML(mtcars,
                              css = list('background-color', "steelblue"), 
                              columns = 1)
 
-## ----example_12----------------------------------------------------------
+## ----example_12---------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
   add_css_conditional_column(conditional = "between", 
@@ -150,7 +150,7 @@ tableHTML(mtcars,
                              columns = c(1, 7))
 
 
-## ----example_13----------------------------------------------------------
+## ----example_13---------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
   add_css_conditional_column(conditional = "contains", 
@@ -162,7 +162,7 @@ tableHTML(mtcars,
                              css = list('background-color', "silver"), 
                              columns = "rownames")
 
-## ----example_20----------------------------------------------------------
+## ----example_20---------------------------------------------------------------
 df <- data.frame(factor_alphabetic = c('d', 'a', 'e', 'a', 'd', 'd', 'a', 'c', 'd', 'a'),
                  factor_ordered = c('D', 'A', 'E', 'A', 'D', 'D', 'A', 'C', 'D', 'A'),
                  stringsAsFactors = TRUE)
@@ -176,7 +176,7 @@ tableHTML(df,
   add_css_conditional_column(color_rank_theme = 'White-Green', 
                              columns = 2)
 
-## ----example_14----------------------------------------------------------
+## ----example_14---------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(140, rep(45, 11))) %>%
   add_css_conditional_column(color_rank_theme = "RAG", columns = 1) %>%
@@ -186,14 +186,14 @@ tableHTML(mtcars,
   add_css_conditional_column(color_rank_theme = "White-Blue", columns = 5) %>%
   add_css_conditional_column(color_rank_theme = "White-Red", columns = 6) 
 
-## ----example_15----------------------------------------------------------
+## ----example_15---------------------------------------------------------------
 tableHTML(mtcars,
           widths = rep(100, 12)) %>%
   add_css_conditional_column(color_rank_theme = "RAG", 
                              columns = 1, 
                              decreasing = TRUE) 
 
-## ----example_16----------------------------------------------------------
+## ----example_16---------------------------------------------------------------
 tableHTML(data.frame(a = 1:20, b = rep(1:5, 4), c = 1:20, d = rep(1:5, 4)), 
           width = rep(80, 4),
           second_headers = list(c(2, 2), 
@@ -209,7 +209,7 @@ tableHTML(data.frame(a = 1:20, b = rep(1:5, 4), c = 1:20, d = rep(1:5, 4)),
                              decreasing = FALSE, 
                              same_scale = FALSE)
 
-## ----example_17----------------------------------------------------------
+## ----example_17---------------------------------------------------------------
 color_rank_css <- 
   make_css_color_rank_theme(list(qsec = mtcars$qsec),
                              colors = RColorBrewer::brewer.pal(9, "Set1"))
@@ -220,7 +220,7 @@ tableHTML(mtcars,
                              color_rank_css = color_rank_css, 
                              columns = 7)
 
-## ----example_18----------------------------------------------------------
+## ----example_18---------------------------------------------------------------
 tableHTML(mtcars,
           widths = c(120, 200, rep(100, 11)),
           row_groups = list(c(10, 10, 12), c('Group 1', 'Group 2', 'Group 3'))) %>%
@@ -243,7 +243,7 @@ tableHTML(mtcars,
                                        c('navy', '1px solid navy')),
                             columns = "row_groups")
 
-## ----example_19----------------------------------------------------------
+## ----example_19---------------------------------------------------------------
 tableHTML(mtcars, 
           border = 2,
           rownames = TRUE, 

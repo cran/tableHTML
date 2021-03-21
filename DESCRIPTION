@@ -1,7 +1,7 @@
 Package: tableHTML
 Type: Package
 Title: A Tool to Create HTML Tables
-Version: 2.0.0
+Version: 2.1.0
 Authors@R: c(
     person("Theo", "Boutaris", email = "teoboot2007@hotmail.com", role = c("aut", "cre", "cph")),
     person("Clemens", "Zauchner", email = "cst.zauchner@gmail.com", role = "aut"),
@@ -16,14 +16,14 @@ Description: A tool to create and style HTML tables with CSS. These can
     (which also work with shiny).
 License: MIT + file LICENSE
 LazyData: TRUE
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Suggests: testthat, knitr, rmarkdown, RColorBrewer
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2019-03-16 16:25:28 UTC; teobo
+Packaged: 2021-03-21 15:19:34 UTC; teobo
 Author: Theo Boutaris [aut, cre, cph],
   Clemens Zauchner [aut],
   Dana Jomar [aut]
 Maintainer: Theo Boutaris <teoboot2007@hotmail.com>
 Repository: CRAN
-Date/Publication: 2019-03-16 17:30:02 UTC
+Date/Publication: 2021-03-21 15:40:02 UTC

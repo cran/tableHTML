@@ -1,14 +1,14 @@
-## ----setup, include=FALSE------------------------------------------------
+## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE)
 
-## ----load_package--------------------------------------------------------
+## ----load_package-------------------------------------------------------------
 library(tableHTML)
 
-## ----theme-scientific----------------------------------------------------
+## ----theme-scientific---------------------------------------------------------
 tableHTML(mtcars, widths = c(140, rep(50, 11))) %>%
  add_theme('scientific')
 
-## ----scientific_2--------------------------------------------------------
+## ----scientific_2-------------------------------------------------------------
 tableHTML(mtcars,
           rownames = FALSE,
           widths = c(140, rep(50, 11)),
@@ -16,11 +16,11 @@ tableHTML(mtcars,
           second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3'))) %>%
   add_theme('scientific')
 
-## ----theme-rshiny-blue---------------------------------------------------
+## ----theme-rshiny-blue--------------------------------------------------------
 tableHTML(mtcars, widths = c(140, rep(50, 11))) %>%
  add_theme('rshiny-blue')
 
-## ----theme_rshiny_blue_2-------------------------------------------------
+## ----theme_rshiny_blue_2------------------------------------------------------
 tableHTML(mtcars,
           rownames = FALSE,
           widths = c(140, rep(50, 11)),
@@ -28,33 +28,33 @@ tableHTML(mtcars,
           second_headers = list(c(3, 4, 5), c('col1', 'col2', 'col3'))) %>%
   add_theme('rshiny-blue')
 
-## ----totals_1------------------------------------------------------------
+## ----totals_1-----------------------------------------------------------------
 df <- mtcars[, 1:6]
 df %>%
   tableHTML(widths = c(150, rep(70, ncol(df))), rownames = TRUE) %>%
   add_theme('colorize')
 
-## ----totals_2------------------------------------------------------------
+## ----totals_2-----------------------------------------------------------------
 df <- mtcars[, 1:6]
 df %>%
   tableHTML(widths = c(150, rep(70, ncol(df))), rownames = TRUE) %>%
   add_theme('colorize', color = 'darkgreen')
 
-## ----totals_3------------------------------------------------------------
+## ----totals_3-----------------------------------------------------------------
 df <- mtcars[, 1:6]
 df['Mean', ] <- (df %>% apply(2, mean))
 df %>%
   tableHTML(widths = c(150, rep(70, ncol(df))), rownames = TRUE) %>%
   add_theme('colorize', color = c('steelblue', 'red'))
 
-## ----totals_4------------------------------------------------------------
+## ----totals_4-----------------------------------------------------------------
 df <- mtcars[, 1:6]
 df['Mean', ] <- (df %>% apply(2, mean))
 df %>%
   tableHTML(widths = c(150, rep(70, ncol(df))), rownames = TRUE) %>%
   add_theme('colorize', color = c('steelblue', 'red'), total_rows = nrow(df))
 
-## ----total_theme_1-------------------------------------------------------
+## ----total_theme_1------------------------------------------------------------
 # one total row
 x1 <- sample(1:100, 12)
 x2 <- sample(1:100, 12)
@@ -69,7 +69,7 @@ df %>%
   tableHTML(widths = rep(50, 4), rownames = FALSE) %>%
   add_theme_colorize(color = 'darkred', total_rows = nrow(df))
 
-## ----total_theme_2-------------------------------------------------------
+## ----total_theme_2------------------------------------------------------------
 df_q <- rbind(
   df[1:3, ],
   c('Sum1', sum(x1[1:3]), sum(x2[1:3]), sum(x3[1:3])),
