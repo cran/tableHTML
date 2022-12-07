@@ -7,8 +7,8 @@
 add_css_conditional_column(
   tableHTML,
   columns,
-  conditional = c("color_rank", "==", "!=", "min", "max", "top_n", "bottom_n", ">",
-    ">=", "<", "<=", "between", "contains", "logical"),
+  conditional = c("color_rank", "==", "!=", "min", "max", "top_n", "bottom_n", ">", ">=",
+    "<", "<=", "between", "contains", "logical"),
   n = NULL,
   value = NULL,
   between = NULL,
