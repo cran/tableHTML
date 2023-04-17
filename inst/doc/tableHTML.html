@@ -11,7 +11,7 @@
 
 <meta name="author" content="Theo Boutaris" />
 
-<meta name="date" content="2022-12-07" />
+<meta name="date" content="2023-04-17" />
 
 <title>tableHTML</title>
 
@@ -171,7 +171,7 @@ pre code {
 
 <h1 class="title toc-ignore">tableHTML</h1>
 <h4 class="author">Theo Boutaris</h4>
-<h4 class="date">2022-12-07</h4>
+<h4 class="date">2023-04-17</h4>
 
 </div>
 
@@ -181,7 +181,7 @@ pre code {
 <pre class="r"><code>library(tableHTML)
 tableHTML(mtcars)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_2385" border="1">
+<table style="border-collapse:collapse;" class="table_2704" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -654,7 +654,7 @@ tableHTML(mtcars)</code></pre>
 <p>To remove row names from the HTML table you can type:</p>
 <pre class="r"><code>tableHTML(mtcars, rownames=FALSE)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_9622" border="1">
+<table style="border-collapse:collapse;" class="table_9023" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1">mpg</th>
@@ -1119,7 +1119,7 @@ str(mytable)
 <p>For example:</p>
 <pre class="r"><code>tableHTML(mtcars, second_headers = list(c(3, 4, 5), c(&#39;col1&#39;, &#39;col2&#39;, &#39;col3&#39;)))</code></pre>
 
-<table style="border-collapse:collapse;" class="table_9722" border="1">
+<table style="border-collapse:collapse;" class="table_6022" border="1">
 <thead>
 <tr>
   <th colspan="3" id="tableHTML_second_header_1">col1</th>
@@ -1601,7 +1601,7 @@ str(mytable)
           rownames = FALSE, 
           row_groups = list(c(10, 10, 12), c(&#39;Group 1&#39;, &#39;Group 2&#39;, &#39;Group 3&#39;)))</code></pre>
 
-<table style="border-collapse:collapse;" class="table_3306" border="1">
+<table style="border-collapse:collapse;" class="table_4538" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_0"></th>
@@ -2050,7 +2050,7 @@ str(mytable)
           widths = rep(100, 12), 
           second_headers = list(c(3, 4, 5), c(&#39;col1&#39;, &#39;col2&#39;, &#39;col3&#39;)))</code></pre>
 
-<table style="border-collapse:collapse;" class="table_8485" border="1">
+<table style="border-collapse:collapse;" class="table_2125" border="1">
 <col width="100">
 <col width="100">
 <col width="100">
@@ -2541,7 +2541,7 @@ str(mytable)
 <p>By default the table border is set to 1. If you set to 0 it will remove all the lines (the grid) completely. Setting it to an integer greater than 1 will increase the size of the table’s outside border.</p>
 <pre class="r"><code>tableHTML(mtcars, border = 0)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_2456" border="0">
+<table style="border-collapse:collapse;" class="table_2644" border="0">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -3015,7 +3015,7 @@ str(mytable)
 <p>If you want a caption (title) for your table you can add one with the caption argument.</p>
 <pre class="r"><code>tableHTML(mtcars, caption = &#39;This is  a table&#39;)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_6797" border="1">
+<table style="border-collapse:collapse;" class="table_9924" border="1">
 <caption>This is  a table</caption>
 <thead>
 <tr>
@@ -3490,7 +3490,7 @@ str(mytable)
 <p>If you want a footer for your table you can add one with the footer argument.</p>
 <pre class="r"><code>tableHTML(mtcars, footer = &#39;This is  a footer&#39;)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_6188" border="1">
+<table style="border-collapse:collapse;" class="table_7695" border="1">
 <caption id="footer" align="bottom">This is  a footer</caption>
 <thead>
 <tr>
@@ -3969,7 +3969,7 @@ str(mytable)
 <p>In order to use a non-collapsed table on shiny you need to use the <code>collapse = &#39;separate_shiny&#39;</code> argument. shiny uses bootstrap 3 by default which uses <code>table {border-collapse: collapse; border-spacing:0;}</code> in its css. <code>collapse = &#39;separate_shiny&#39;</code> will use the <code>!important</code> keyword in HTML which overwrites the default bootstrap 3 styling. Web developers argue that using <code>!important</code> can be dangerous since it overwrites previously set styles, so only use it on shiny or other web applications where tables are collapsed by default.</p>
 <pre class="r"><code>tableHTML(mtcars, collapse = &#39;separate_shiny&#39;)</code></pre>
 
-<table style="border-collapse:separate !important;border-spacing:2px; !important" class="table_2171" border="1">
+<table style="border-collapse:separate !important;border-spacing:2px; !important" class="table_8503" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -4443,7 +4443,7 @@ str(mytable)
 <p>If collapse is either separate or separate_shiny then you can use the spacing argument to change the spacing between the cells. This only works if collapse is separate or separate_shiny otherwise it is not taken into account. You can use one or two length distances. If two length distances are used, the first specifies the horizontal spacing and the second one the vertical spacing.</p>
 <pre class="r"><code>tableHTML(mtcars, collapse = &#39;separate_shiny&#39;, spacing = &#39;2px&#39;)</code></pre>
 
-<table style="border-collapse:separate !important;border-spacing:2px; !important" class="table_4907" border="1">
+<table style="border-collapse:separate !important;border-spacing:2px; !important" class="table_4762" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -4914,7 +4914,7 @@ str(mytable)
 <p> </p>
 <pre class="r"><code>tableHTML(mtcars, collapse = &#39;separate_shiny&#39;, spacing = &#39;5px 2px&#39;)</code></pre>
 
-<table style="border-collapse:separate !important;border-spacing:5px 2px; !important" class="table_2944" border="1">
+<table style="border-collapse:separate !important;border-spacing:5px 2px; !important" class="table_2753" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -5389,7 +5389,7 @@ str(mytable)
 <pre class="r"><code>df &lt;- data.frame(a = c(&#39;abcd&lt;efgh&#39;))
 tableHTML(df, escape = FALSE, rownames = FALSE)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_6435" border="1">
+<table style="border-collapse:collapse;" class="table_9899" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1">a</th>
@@ -5405,7 +5405,7 @@ tableHTML(df, escape = FALSE, rownames = FALSE)</code></pre>
 </p>
 <pre class="r"><code>tableHTML(df, escape = TRUE, rownames = FALSE)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_2438" border="1">
+<table style="border-collapse:collapse;" class="table_4280" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1">a</th>
@@ -5438,7 +5438,7 @@ tableHTML(df, escape = FALSE, rownames = FALSE)</code></pre>
   tableHTML(widths = c(140, rep(45, 11))) %&gt;% 
   add_css_row(css = list(c(&#39;background-color&#39;, &#39;border&#39;), c(&#39;lightblue&#39;, &#39;2px solid lightgray&#39;)))</code></pre>
 
-<table style="border-collapse:collapse;" class="table_2723" border="1">
+<table style="border-collapse:collapse;" class="table_1623" border="1">
 <col width="140">
 <col width="45">
 <col width="45">
@@ -5925,7 +5925,7 @@ tableHTML(df, escape = FALSE, rownames = FALSE)</code></pre>
   add_css_row(css = list(c(&#39;background-color&#39;, &#39;border&#39;), c(&#39;lightblue&#39;, &#39;2px solid lightgray&#39;)),
               rows = 2:33)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_9372" border="1">
+<table style="border-collapse:collapse;" class="table_5869" border="1">
 <col width="140">
 <col width="45">
 <col width="45">
@@ -6414,7 +6414,7 @@ tableHTML(df, escape = FALSE, rownames = FALSE)</code></pre>
   add_css_row(css = list(&#39;background-color&#39;, &#39;#e6f0ff&#39;),
               rows = even(1:33))</code></pre>
 
-<table style="border-collapse:collapse;" class="table_3054" border="1">
+<table style="border-collapse:collapse;" class="table_4909" border="1">
 <col width="140">
 <col width="45">
 <col width="45">
@@ -6909,7 +6909,7 @@ tableHTML(df, escape = FALSE, rownames = FALSE)</code></pre>
   add_css_column(css = list(c(&#39;background-color&#39;, &#39;border&#39;), c(&#39;lightblue&#39;, &#39;3px solid lightgray&#39;)), 
                  columns = c(&#39;cyl&#39;, &#39;hp&#39;, &#39;rownames&#39;))</code></pre>
 
-<table style="border-collapse:collapse;" class="table_2533" border="1">
+<table style="border-collapse:collapse;" class="table_9012" border="1">
 <col width="140">
 <col width="45">
 <col width="45">
@@ -7397,7 +7397,7 @@ tableHTML(df, escape = FALSE, rownames = FALSE)</code></pre>
   add_css_column(css = list(&#39;background-color&#39;, &#39;lightblue&#39;), 
                  columns = c(&#39;cyl&#39;, &#39;hp&#39;, &#39;rownames&#39;)) </code></pre>
 
-<table style="border-collapse:collapse;" class="table_9315" border="1">
+<table style="border-collapse:collapse;" class="table_7527" border="1">
 <col width="140">
 <col width="45">
 <col width="45">
@@ -7899,7 +7899,7 @@ truncated...</code></pre>
                                     rep(c(&#39;red&#39;, &#39;green&#39;), each = 16)),
                          column = &#39;mpg&#39;)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_7761" border="1">
+<table style="border-collapse:collapse;" class="table_9904" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -8378,7 +8378,7 @@ truncated...</code></pre>
                                     rep(c(&#39;green&#39;, &#39;red&#39;), each = 16)),
                          column = &#39;cyl&#39;)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_7809" border="1">
+<table style="border-collapse:collapse;" class="table_9854" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -8856,7 +8856,7 @@ truncated...</code></pre>
                                     rep(c(&#39;red&#39;, &#39;green&#39;), each = 16)),
                          column = &#39;mpg&#39;)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_8711" border="1">
+<table style="border-collapse:collapse;" class="table_9207" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -9331,7 +9331,7 @@ truncated...</code></pre>
 <pre class="r"><code> tableHTML(mtcars) %&gt;%
    add_editable_column(columns = &#39;mpg&#39;)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_5597" border="1">
+<table style="border-collapse:collapse;" class="table_7288" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -9813,7 +9813,7 @@ truncated...</code></pre>
   tableHTML(widths = c(140, rep(45, 11))) %&gt;% 
   add_css_header(css = list(&#39;background-color&#39;, &#39;lightgray&#39;), headers = c(1, 4))</code></pre>
 
-<table style="border-collapse:collapse;" class="table_1989" border="1">
+<table style="border-collapse:collapse;" class="table_9808" border="1">
 <col width="140">
 <col width="45">
 <col width="45">
@@ -10309,7 +10309,7 @@ truncated...</code></pre>
                                    c(&#39;lightgray&#39;, &#39;3px solid green&#39;)),
                         second_headers = c(1, 3))  </code></pre>
 
-<table style="border-collapse:collapse;" class="table_9400" border="1">
+<table style="border-collapse:collapse;" class="table_4953" border="1">
 <col width="140">
 <col width="45">
 <col width="45">
@@ -10807,7 +10807,7 @@ truncated...</code></pre>
             caption = &#39;This is a table&#39;) %&gt;% 
   add_css_caption(css = list(c(&#39;color&#39;, &#39;font-size&#39;, &#39;text-align&#39;), c(&#39;blue&#39;, &#39;20px&#39;, &#39;left&#39;)))  </code></pre>
 
-<table style="border-collapse:collapse;" class="table_9270" border="1">
+<table style="border-collapse:collapse;" class="table_3219" border="1">
 <caption style="color:blue;font-size:20px;text-align:left;">This is a table</caption>
 <col width="140">
 <col width="45">
@@ -11301,7 +11301,7 @@ truncated...</code></pre>
             footer = &#39;This is a footer&#39;) %&gt;% 
   add_css_footer(css = list(c(&#39;color&#39;, &#39;font-size&#39;, &#39;text-align&#39;), c(&#39;blue&#39;, &#39;20px&#39;, &#39;left&#39;)))  </code></pre>
 
-<table style="border-collapse:collapse;" class="table_3817" border="1">
+<table style="border-collapse:collapse;" class="table_4081" border="1">
 <caption id="footer" align="bottom" style="color:blue;font-size:20px;text-align:left;">This is a footer</caption>
 <col width="140">
 <col width="45">
@@ -11794,7 +11794,7 @@ truncated...</code></pre>
   tableHTML() %&gt;% 
   add_css_thead(css = list(&#39;background-color&#39;, &#39;lightgray&#39;)) </code></pre>
 
-<table style="border-collapse:collapse;" class="table_1953" border="1">
+<table style="border-collapse:collapse;" class="table_8312" border="1">
 <thead style="background-color:lightgray;">
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -12274,7 +12274,7 @@ truncated...</code></pre>
   tableHTML() %&gt;% 
   add_css_tbody(css = list(&#39;background-color&#39;, &#39;lightgray&#39;)) </code></pre>
 
-<table style="border-collapse:collapse;" class="table_1105" border="1">
+<table style="border-collapse:collapse;" class="table_5758" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -12750,7 +12750,7 @@ truncated...</code></pre>
   add_css_thead(css = list(&#39;background-color&#39;, &#39;lightgray&#39;)) %&gt;%
   add_css_row(css = list(&#39;background-color&#39;, &#39;blue&#39;), rows = 1)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_8747" border="1">
+<table style="border-collapse:collapse;" class="table_9489" border="1">
 <thead style="background-color:lightgray;">
 <tr style="background-color:blue;">
   <th id="tableHTML_header_1"> </th>
@@ -13224,7 +13224,7 @@ truncated...</code></pre>
   add_css_tbody(css = list(&#39;background-color&#39;, &#39;lightgray&#39;)) %&gt;%
   add_css_row(css = list(&#39;background-color&#39;, &#39;blue&#39;), rows = c(4, 6))</code></pre>
 
-<table style="border-collapse:collapse;" class="table_3374" border="1">
+<table style="border-collapse:collapse;" class="table_9806" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -13704,7 +13704,7 @@ truncated...</code></pre>
   tableHTML() %&gt;% 
   add_css_table(css = list(&#39;background-color&#39;, &#39;lightgray&#39;)) </code></pre>
 
-<table style="background-color:lightgray;border-collapse:collapse;" class="table_7944" border="1">
+<table style="background-color:lightgray;border-collapse:collapse;" class="table_6107" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -14197,7 +14197,7 @@ truncated...</code></pre>
   add_css_caption(css = list(c(&#39;text-align&#39;, &#39;font-size&#39;, &#39;color&#39;), c(&#39;center&#39;, &#39;20px&#39;, &#39;black&#39;))) %&gt;%
   add_css_footer(css = list(c(&#39;text-align&#39;, &#39;color&#39;), c(&#39;left&#39;, &#39;black&#39;)))</code></pre>
 
-<table style="border-collapse:collapse;" class="table_3575" border="1">
+<table style="border-collapse:collapse;" class="table_7210" border="1">
 <caption style="text-align:center;font-size:20px;color:black;">Table of Cars</caption>
 <caption id="footer" align="bottom" style="text-align:left;color:black;">Figure 1. Stats for famous cars</caption>
 <col width="140">
@@ -14694,7 +14694,7 @@ tableHTML(data.frame(cran = make_hyperlink(c(&#39;https://cran.r-project.org/&#3
                                              &#39;https://cran.r-project.org/package=tableHTML&#39;))), 
           escape = FALSE)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_7291" border="1">
+<table style="border-collapse:collapse;" class="table_8320" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -14720,7 +14720,7 @@ tableHTML(data.frame(cran = make_hyperlink(c(&#39;https://cran.r-project.org/&#3
                                            c(&#39;cran&#39;, &#39;tableHTML&#39;))), 
           escape = FALSE)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_1868" border="1">
+<table style="border-collapse:collapse;" class="table_3460" border="1">
 <thead>
 <tr>
   <th id="tableHTML_header_1"> </th>
@@ -14747,7 +14747,7 @@ tableHTML(data.frame(cran = make_hyperlink(c(&#39;https://cran.r-project.org/&#3
  replace_html(&#39; &lt;td id=&quot;tableHTML_column_1&quot;&gt;21&lt;/td&gt;&#39;, 
               &#39;&lt;td id=&quot;mpg&quot; style=&quot;background-color:lightyellow&quot;&gt;21&lt;/td&gt;&#39;)</code></pre>
 
-<table style="border-collapse:collapse;" class="table_7415" border="1">
+<table style="border-collapse:collapse;" class="table_7400" border="1">
 <col width="140">
 <col width="45">
 <col width="45">
@@ -15335,7 +15335,7 @@ function(input, output) {
 }</code></pre>
 <p>Our HTML table will look like this:</p>
 
-<table style="border-collapse:collapse;" class="table_8419" border="1">
+<table style="border-collapse:collapse;" class="table_9287" border="1">
 <thead>
 <tr>
   <th colspan="3" id="tableHTML_second_header_1">col1</th>
@@ -15819,7 +15819,7 @@ function(input, output) {
     background-color: green;
 }</code></pre>
 
-<table style="border-collapse:collapse;" class="table_2852" border="1">
+<table style="border-collapse:collapse;" class="table_5920" border="1">
 <thead>
 <tr>
   <th colspan="3" id="tableHTML_second_header_1">col1</th>
@@ -16307,7 +16307,7 @@ function(input, output) {
     background-color: steelblue; 
 } </code></pre>
 
-<table style="border-collapse:collapse;" class="table_6651" border="1">
+<table style="border-collapse:collapse;" class="table_9445" border="1">
 <thead>
 <tr>
   <th colspan="3" id="tableHTML_second_header_1" style="background-color:steelblue;">col1</th>
